@@ -1,6 +1,6 @@
 describe('BooksListCntl tests', function () {
     'use strict';
-    var $scope, modalMock = {};
+    var $scope;
 
     beforeEach(module('app'));
 
@@ -66,7 +66,7 @@ describe('BooksListCntl tests', function () {
             // then
             expect($modal.open).toHaveBeenCalledWith({
                 animation: true,
-                templateUrl: 'main/edit-book/edit-book.tpl.html',
+                templateUrl: '/edit-book/edit-book.tpl.html',
                 controller: 'EditBookCntl',
                 size: 'modal-lg',
                 resolve: {book: jasmine.any(Function)}

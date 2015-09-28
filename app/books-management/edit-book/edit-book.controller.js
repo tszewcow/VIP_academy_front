@@ -1,4 +1,4 @@
-angular.module('app.main')
+angular.module('app.books-management')
     .controller('EditBookCntl', function ($scope, book, $modalInstance) {
         'use strict';
 

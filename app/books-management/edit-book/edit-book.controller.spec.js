@@ -12,7 +12,7 @@ describe('EditBookCntl tests', function () {
         close: jasmine.createSpy('close mock'),
         dismiss: jasmine.createSpy('dismiss mock')
     };
-    beforeEach(module('app.main'));
+    beforeEach(module('app.books-management'));
     beforeEach(inject(function ($controller, $rootScope) {
         $scope = $rootScope.$new();
         $controller('EditBookCntl', {$scope: $scope, book: bookMock, $modalInstance: $modalInstanceMock});

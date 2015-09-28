@@ -1,4 +1,4 @@
-angular.module('app.main')
+angular.module('app.books-management')
     .controller('BooksListCntl', function ($scope, $modal) {
         'use strict';
 
@@ -39,7 +39,7 @@ angular.module('app.main')
         $scope.editBook = function () {
             $modal.open({
                 animation: true,
-                templateUrl: 'main/edit-book/edit-book.tpl.html',
+                templateUrl: '/edit-book/edit-book.tpl.html',
                 controller: 'EditBookCntl',
                 size: 'modal-lg',
                 resolve: {
