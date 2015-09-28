@@ -1,5 +1,5 @@
 angular.module('app.main')
-    .controller('BooksListCntl', function ($scope) {
+    .controller('BooksListCntl', function ($scope, $modal) {
         'use strict';
 
         $scope.books = [{name: 'Moroni', age: 50},
