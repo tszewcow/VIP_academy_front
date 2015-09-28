@@ -3,6 +3,38 @@
 <body>
 
 <!--put dialog html here-->
+<section data-ng-controller="BooksListCntl">
+    <form>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Books list</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table data-tr-ng-grid=""
+                       data-enable-filtering="false"
+                       data-selection-mode="SingleRow"
+                       data-items="books"
+                       data-selected-items="selectedBook">
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-md-3">
+                    <button class="btn btn-default" data-ng-click="editBook()" data-ng-disabled="isDisabled()">Edit
+                    </button>
+                    <button class="btn btn-default" data-ng-click="addBook()">Add</button>
+                    <button class="btn btn-default" data-ng-click="deleteBook()" data-ng-disabled="isDisabled()">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
 
 </body>
 </html>
