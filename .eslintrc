@@ -1,8 +1,17 @@
 {
     "rules": {
-        "quotes": [2, "single"],
-        "linebreak-style": [2, "windows"],
-        "semi": [2, "always"],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "windows"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
         "strict": 2
     },
     "env": {
@@ -10,18 +19,20 @@
     },
     "globals": {
         "angular": true,
-         // Angular Mocks
-         "inject": false,
-         // JASMINE
-         "describe": false,
-         "it": false,
-         "before": false,
-         "beforeEach": false,
-         "after": false,
-         "afterEach": false,
-         "expect": false,
-         "jasmine": false,
-         "spyOn": false
-      },
+        // Angular Mocks
+        "inject": false,
+        // JASMINE
+        "describe": false,
+        "it": false,
+        "before": false,
+        "beforeEach": false,
+        "after": false,
+        "afterEach": false,
+        "expect": false,
+        "jasmine": false,
+        "spyOn": false,
+        // Underscore
+        "_": false
+    },
     "extends": "eslint:recommended"
 }

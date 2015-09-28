@@ -1,9 +1,9 @@
-describe('EditBookCntl tests', function () {
+describe('AddBookCntl tests', function () {
     'use strict';
 
-    beforeEach(module('app.main'));
+    beforeEach(module('app.books-management'));
     beforeEach(inject(function ($controller) {
-        $controller('EditBookCntl', {$scope: {}});
+        $controller('AddBookCntl', {$scope: {}});
     }));
 
     describe('tests', function () {
