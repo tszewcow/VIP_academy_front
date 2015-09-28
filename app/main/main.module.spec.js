@@ -15,7 +15,7 @@ describe('\'app.main\' module', function () {
     beforeEach(inject());
 
     it('defines a route for the welcome dialog', function () {
-        expect(routeProvider.when).toHaveBeenCalledWith('/', { templateUrl : 'books-management/books-list' });
+        expect(routeProvider.when).toHaveBeenCalledWith('/', { redirectTo : 'books-management/books-list' });
     });
 
     it('defines the default route redirecting to the welcome dialog', function () {
