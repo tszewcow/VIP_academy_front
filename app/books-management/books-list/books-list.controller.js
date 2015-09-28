@@ -1,45 +1,30 @@
 angular.module('app.books-management')
-    .controller('BooksListCntl', function ($scope, $modal) {
+    .controller('BooksListCntl', function ($scope, $modal, booksData) {
         'use strict';
 
-        $scope.books = [{id: 1, version: 0, genre: 'it', year: 1999, title: 'Code Complete', author: 'Steve McConnell'},
-            {
-                id: 2,
-                version: 0,
-                genre: 'it',
-                year: 2001,
-                title: 'Python. Wprowadzenie',
-                author: 'Mark Lutz, David Ascher'
-            },
-            {id: 3, version: 0, genre: 'it', year: 2013, title: 'Sztuka programowania', author: 'Donald Knuth'},
-            {
-                id: 4,
-                version: 0,
-                genre: 'it',
-                year: 2003,
-                title: 'Pragmatyczny programista',
-                author: 'Andy Hunt, Dave Thomas'
-            },
-            {
-                id: 5,
-                version: 0,
-                genre: 'it',
-                year: 2001,
-                title: 'Wzorce projektowe',
-                author: 'Erich Gamma, Ralph Johnson, Richard Helm, John Vlissides'
-            }];
-
+        $scope.books = [];
         $scope.selectedBook = [];
         $scope.visibleColumns = ['title', 'author'];
+        $scope.searchParameters = {};
 
         $scope.isDisabled = function () {
             return !$scope.selectedBook.length;
         };
 
+        $scope.resultsFound = function () {
+            return $scope.books.length;
+        };
+
+        $scope.search = function () {
+            booksData.getBooks($scope.searchParameters).then(function (response) {
+                angular.copy(response.data, $scope.books);
+            });
+        };
+
         $scope.editBook = function () {
             $modal.open({
                 animation: true,
-                templateUrl: '/edit-book/edit-book.tpl.html',
+                templateUrl: '/books-management/edit-book/edit-book.tpl.html',
                 controller: 'EditBookCntl',
                 size: 'modal-lg',
                 resolve: {

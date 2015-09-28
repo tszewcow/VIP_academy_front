@@ -19,6 +19,41 @@ describe('BooksListCntl tests', function () {
         });
 
     });
+    describe('search', function () {
+        it('should show result, when result found', function () {
+            // given
+            $scope.books = [{name: 'test'}];
+            // when then
+            expect($scope.resultsFound()).toBeTruthy();
+        });
+        it('should show not result, when result not found', function () {
+            // given
+            $scope.books = [];
+            // when then
+            expect($scope.resultsFound()).toBeFalsy();
+        });
+        it('should search for books by given searchParams', inject(function ($q, booksData) {
+            // given
+            var deferred = $q.defer(), response = [{
+                id: 1,
+                version: 0,
+                title: 'book title',
+                author: 'book author',
+                year: 1999,
+                genre: 'it'
+            }];
+            spyOn(booksData, 'getBooks').and.returnValue(deferred.promise);
+            $scope.searchParameters = {title: 'book title', author: 'book author'};
+            // when
+            $scope.search();
+            deferred.resolve({data: response});
+            $scope.$digest();
+            // then
+            expect(booksData.getBooks).toHaveBeenCalledWith($scope.searchParameters);
+            expect($scope.books.length).toBe(1);
+            expect($scope.books).toEqual(response);
+        }));
+    });
     describe('table buttons', function () {
         it('should disabled edit and delete buttons, when no book was selected', function () {
             // given
@@ -66,7 +101,7 @@ describe('BooksListCntl tests', function () {
             // then
             expect($modal.open).toHaveBeenCalledWith({
                 animation: true,
-                templateUrl: '/edit-book/edit-book.tpl.html',
+                templateUrl: '/books-management/edit-book/edit-book.tpl.html',
                 controller: 'EditBookCntl',
                 size: 'modal-lg',
                 resolve: {book: jasmine.any(Function)}
