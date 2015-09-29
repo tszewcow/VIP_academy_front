@@ -25,14 +25,20 @@ describe('AddBookCntl tests', function () {
             // then
             expect($modalInstanceMock.dismiss).toHaveBeenCalledWith('cancel');
         });
-        it('should return added book on add button clicked', function () {
+        it('should return added book on add button clicked', inject(function (booksData, $q) {
             // given
+            var saveBookDeferred = $q.defer(),
+                addedBook = {id: 1, title: 'new book'};
             $scope.book = bookMock;
+            spyOn(booksData, 'saveBook').and.returnValue(saveBookDeferred.promise);
             // when
             $scope.addBook();
+            saveBookDeferred.resolve(addedBook);
+            $scope.$digest();
             // then
-            expect($modalInstanceMock.close).toHaveBeenCalledWith(bookMock);
-        });
+            expect(booksData.saveBook).toHaveBeenCalledWith(bookMock);
+            expect($modalInstanceMock.close).toHaveBeenCalledWith(addedBook);
+        }));
         it('should disable add button when form is invalid', function () {
             // given
             $scope.addForm = {
