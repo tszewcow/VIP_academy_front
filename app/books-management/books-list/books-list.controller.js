@@ -50,7 +50,10 @@ angular.module('app.books-management')
         };
 
         $scope.deleteBook = function () {
-            booksData.deleteBook($scope.selectedBook[0].id);
+            booksData.deleteBook($scope.selectedBook[0].id).then(function () {
+                    $scope.search();
+                }
+            );
         };
 
     });

@@ -145,12 +145,14 @@ describe('BooksListCntl tests', function () {
             };
             $scope.selectedBook = [deleteBook];
             spyOn(booksData, 'deleteBook').and.returnValue(deleteBookDeferred.promise);
+            spyOn($scope, 'search');
             // when
             $scope.deleteBook();
             deleteBookDeferred.resolve();
             $scope.$digest();
             // then
             expect(booksData.deleteBook).toHaveBeenCalledWith(deleteBook.id);
+            expect($scope.search).toHaveBeenCalled();
         }));
     });
 });
