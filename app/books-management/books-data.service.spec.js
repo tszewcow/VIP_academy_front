@@ -1,63 +1,71 @@
 describe('booksData service tests', function () {
     'use strict';
 
-    var booksData;
+    var booksData, $httpBackend;
     beforeEach(module('app.books-management'));
-    beforeEach(inject(function (_booksData_) {
+    beforeEach(inject(function (_booksData_, _$httpBackend_) {
         booksData = _booksData_;
+        $httpBackend = _$httpBackend_;
     }));
 
-    it('should call $http.get when books.getBooks is called', inject(function($http){
-        // given
-        var searchParams = {title: 'title', author: 'author'};
-        spyOn($http, 'get');
-        // when
-        booksData.getBooks(searchParams);
+    afterEach(function () {
         // then
-        expect($http.get).toHaveBeenCalledWith('/books-management/books-list/books.json',{params: searchParams});
-    }));
+        $httpBackend.verifyNoOutstandingExpectation();
+        $httpBackend.verifyNoOutstandingRequest();
+    });
 
-    it('should call $http.post when books.saveBook is called',  inject(function($http){
+    it('should load books', function () {
         // given
-        var book =  {
-            "id": 1,
-            "version": 0,
-            "genre": "it",
-            "year": 1999,
-            "title": "Code Complete",
-            "author": "Steve McConnell"
-        };
-        spyOn($http, 'post');
+        var searchParams = {title: 'title', author: 'author'}, books = [], response = [
+            {id: 0, title: 'title1'},
+            {id: 1, title: 'title2'}
+        ];
+        $httpBackend.expectGET('/books-management/books-list/books.json?author=author&title=title').respond(response);
         // when
-        booksData.saveBook(book);
+        booksData.getBooks(searchParams).then(function (response) {
+            books = response.data;
+        });
+        $httpBackend.flush();
         // then
-        expect($http.post).toHaveBeenCalledWith('/book', book);
-    }));
+        expect(books).toEqual(response);
+    });
 
-    it('should call $http.put when books.updateBook is called',  inject(function($http){
+    it('should save the book', function () {
         // given
-        var book =  {
-            "id": 1,
-            "version": 0,
-            "genre": "it",
-            "year": 1999,
-            "title": "Code Complete",
-            "author": "Steve McConnell"
+        var bookBeforeSave = {
+            genre: 'it',
+            year: 1999,
+            title: 'Code Complete',
+            author: 'Steve McConnell'
         };
-        spyOn($http, 'put');
+        $httpBackend.expectPOST('/book').respond(201);
+        // when
+        booksData.saveBook(bookBeforeSave);
+        $httpBackend.flush();
+    });
+
+    it('should update book', function () {
+        // given
+        var book = {
+            id: 1,
+            version: 0,
+            genre: 'it',
+            year: 1999,
+            title: 'Code Complete',
+            author: 'Steve McConnell'
+        };
+        $httpBackend.expectPUT('/book/' + book.id).respond(200);
         // when
         booksData.updateBook(book);
-        // then
-        expect($http.put).toHaveBeenCalledWith('/book/1', book);
-    }));
+        $httpBackend.flush();
+    });
 
-    it('should call $http.delete when books.deleteBook is called',  inject(function($http){
+    it('should delete book', function () {
         // given
-        spyOn($http, 'delete');
+        var bookId = 1;
+        $httpBackend.expectDELETE('/book/' + bookId).respond(200);
         // when
         booksData.deleteBook(1);
-        // then
-        expect($http.delete).toHaveBeenCalledWith('/book/1');
-    }));
-
+        $httpBackend.flush();
+    });
 });
