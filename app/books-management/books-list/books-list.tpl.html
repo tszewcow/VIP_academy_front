@@ -41,10 +41,21 @@
                 <div class="row">
                     <div class="form-group">
                         <div class="col-md-12">
-                            <button class="btn btn-default" data-ng-click="editBook()" data-ng-disabled="isDisabled()">Edit
+                            <button class="btn btn-default" data-ng-click="editBook()" data-ng-disabled="isDisabled()">
+                                Edit
                             </button>
                             <button class="btn btn-default" data-ng-click="addBook()">Add</button>
-                            <button class="btn btn-default" data-ng-click="deleteBook()" data-ng-disabled="isDisabled()">
+                            <button class="btn btn-default"
+                                    data-ng-disabled="isDisabled()"
+                                    data-mwl-confirm
+                                    data-title="Delete book"
+                                    data-message="Do you want to delete selected book?"
+                                    data-confirm-text="Yes"
+                                    data-cancel-text="No"
+                                    data-placement="top"
+                                    data-on-confirm="deleteBook()"
+                                    data-confirm-button-type="danger"
+                                    data-cancel-button-type="default">
                                 Delete
                             </button>
                         </div>

@@ -1,19 +1,22 @@
 angular.module('app.books-management')
-  .controller('AddBookCntl', function ($scope, $modalInstance) {
+    .controller('AddBookCntl', function ($scope, $modalInstance, booksData) {
         'use strict';
         $scope.book = {};
 
         $scope.addForm = {};
 
         $scope.addBook = function () {
-            $modalInstance.close($scope.book);
+            booksData.saveBook($scope.book).then(function (addedBook) {
+                    $modalInstance.close(addedBook);
+                }
+            );
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
 
-        $scope.isFormInvalid = function(){
+        $scope.isFormInvalid = function () {
             return $scope.addForm.$invalid;
         };
 

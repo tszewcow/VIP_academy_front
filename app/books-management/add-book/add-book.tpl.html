@@ -9,7 +9,7 @@
     <div class="modal-body">
         <form class="form-horizontal" name="addForm">
             <div class="form-group"
-                 data-ng-class="{'has-error': addForm.titleInput.$invalid}">
+                 data-ng-class="{'has-error': addForm.titleInput.$invalid && addForm.titleInput.$dirty}">
                 <label for="titleInput" class="col-md-2 control-label">Title:</label>
 
                 <div class="col-md-10">
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-group"
-                 data-ng-class="{'has-error': addForm.authorInput.$invalid}">
+                 data-ng-class="{'has-error': addForm.authorInput.$invalid && addForm.authorInput.$dirty}">
                 <label for="authorInput" class="col-md-2 control-label">Author:</label>
 
                 <div class="col-md-10">
@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="form-group"
-                 data-ng-class="{'has-error': addForm.yearInput.$invalid}">
+                 data-ng-class="{'has-error': addForm.yearInput.$invalid && addForm.yearInput.$dirty}">
                 <label for="yearInput" class="col-md-2 control-label">Year:</label>
 
                 <div class="col-md-10">
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div class="form-group"
-                 data-ng-class="{'has-error': addForm.genreInput.$invalid}">
+                 data-ng-class="{'has-error': addForm.genreInput.$invalid && addForm.genreInput.$dirty}">
                 <label for="genreInput" class="col-md-2 control-label">Genre:</label>
 
                 <div class="col-md-10">

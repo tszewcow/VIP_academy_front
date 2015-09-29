@@ -25,12 +25,20 @@ describe('EditBookCntl tests', function () {
             // then
             expect($modalInstanceMock.dismiss).toHaveBeenCalledWith('cancel');
         });
-        it('should return edited book on edit button clicked', function () {
-            // given when
+        it('should return edited book on edit button clicked', inject(function (booksData, $q) {
+            // given
+            var editBookDeferred = $q.defer(),
+                editedBook = {id: 1, title: 'new book'};
+            $scope.book = bookMock;
+            spyOn(booksData, 'updateBook').and.returnValue(editBookDeferred.promise);
+            // when
             $scope.editBook();
+            editBookDeferred.resolve(editedBook);
+            $scope.$digest();
             // then
-            expect($modalInstanceMock.close).toHaveBeenCalledWith(bookMock);
-        });
+            expect(booksData.updateBook).toHaveBeenCalledWith(bookMock);
+            expect($modalInstanceMock.close).toHaveBeenCalledWith(editedBook);
+        }));
         it('should disable edit button when form is invalid', function () {
             // given
             $scope.editForm = {

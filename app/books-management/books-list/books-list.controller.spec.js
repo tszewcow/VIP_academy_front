@@ -108,5 +108,51 @@ describe('BooksListCntl tests', function () {
             });
             expect($scope.books[0]).toEqual(editedBook);
         }));
+        it('should open add book modal dialog on add button clicked', inject(function ($q, $modal) {
+            // given
+            var modalResultDeferred = $q.defer(), addedBook = {
+                id: 1,
+                version: 0,
+                genre: 'it',
+                year: 1999,
+                title: 'Code Complete',
+                author: 'new author'
+            };
+            spyOn($modal, 'open').and.returnValue({result: modalResultDeferred.promise});
+            spyOn($scope, 'search');
+            // when
+            $scope.addBook();
+            modalResultDeferred.resolve(addedBook);
+            $scope.$digest();
+            // then
+            expect($modal.open).toHaveBeenCalledWith({
+                animation: true,
+                templateUrl: '/books-management/add-book/add-book.tpl.html',
+                controller: 'AddBookCntl',
+                size: 'modal-lg'
+            });
+            expect($scope.search).toHaveBeenCalled();
+        }));
+        it('should delete book on delete button clicked', inject(function ($q, booksData) {
+            // given
+            var deleteBookDeferred = $q.defer(), deleteBook = {
+                id: 1,
+                version: 0,
+                genre: 'it',
+                year: 1999,
+                title: 'Code Complete',
+                author: 'edited author'
+            };
+            $scope.selectedBook = [deleteBook];
+            spyOn(booksData, 'deleteBook').and.returnValue(deleteBookDeferred.promise);
+            spyOn($scope, 'search');
+            // when
+            $scope.deleteBook();
+            deleteBookDeferred.resolve();
+            $scope.$digest();
+            // then
+            expect(booksData.deleteBook).toHaveBeenCalledWith(deleteBook.id);
+            expect($scope.search).toHaveBeenCalled();
+        }));
     });
 });
