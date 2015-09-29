@@ -1,4 +1,3 @@
-angular.module('app.main').controller('AppCntl', function ($scope) {
+angular.module('app.main').controller('AppCntl', function () {
     'use strict';
-    $scope.message = 'Hello!';
 });
