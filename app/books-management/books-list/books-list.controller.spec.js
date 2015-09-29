@@ -92,7 +92,7 @@ describe('BooksListCntl tests', function () {
                 title: 'Sztuka programowania',
                 author: 'Donald Knuth'
             }];
-            $scope.selectedBook = $scope.books[0];
+            $scope.selectedBook = [$scope.books[0]];
             spyOn($modal, 'open').and.returnValue({result: modalResultDeferred.promise});
             // when
             $scope.editBook();
@@ -106,6 +106,7 @@ describe('BooksListCntl tests', function () {
                 size: 'modal-lg',
                 resolve: {book: jasmine.any(Function)}
             });
+            expect($modal.open.calls.mostRecent().args[0].resolve.book()).toEqual(editedBook);
             expect($scope.books[0]).toEqual(editedBook);
         }));
         it('should open add book modal dialog on add button clicked', inject(function ($q, $modal) {

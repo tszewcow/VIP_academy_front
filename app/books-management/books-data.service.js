@@ -7,7 +7,7 @@ angular.module('app.books-management').factory('booksData', function ($http) {
             return $http.get('/books-management/books-list/books.json', {params: searchParams});
         },
         saveBook: function (book) {
-            return $http.post('/book/' + book.id, book);
+            return $http.post('/book', book);
         },
         updateBook: function (book) {
             return $http.put('/book/' + book.id, book);

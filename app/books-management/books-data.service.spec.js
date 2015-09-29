@@ -31,7 +31,7 @@ describe('booksData service tests', function () {
         // when
         booksData.saveBook(book);
         // then
-        expect($http.post).toHaveBeenCalledWith('/book/1', book);
+        expect($http.post).toHaveBeenCalledWith('/book', book);
     }));
 
     it('should call $http.put when books.updateBook is called',  inject(function($http){
