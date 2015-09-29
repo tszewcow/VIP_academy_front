@@ -42,17 +42,7 @@
                             Edit
                         </button>
                         <button class="btn btn-default" data-ng-click="addBook()">Add</button>
-                        <button class="btn btn-default"
-                                data-ng-disabled="isDisabled()"
-                                data-mwl-confirm
-                                data-title="Delete book"
-                                data-message="Do you want to delete selected book?"
-                                data-confirm-text="Yes"
-                                data-cancel-text="No"
-                                data-placement="top"
-                                data-on-confirm="deleteBook()"
-                                data-confirm-button-type="danger"
-                                data-cancel-button-type="default">
+                        <button class="btn btn-default" data-ng-disabled="isDisabled()" data-ng-click="deleteBook()">
                             Delete
                         </button>
                     </div>

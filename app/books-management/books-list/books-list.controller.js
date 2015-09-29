@@ -50,10 +50,16 @@ angular.module('app.books-management')
         };
 
         $scope.deleteBook = function () {
-            booksData.deleteBook($scope.selectedBook[0].id).then(function () {
-                    $scope.search();
-                }
-            );
+            $modal.open({
+                animation: true,
+                templateUrl: '/main/confirmation-dialog/confirmation.html',
+                size: 'modal-sm'
+            }).result.then(function () {
+                    booksData.deleteBook($scope.selectedBook[0].id).then(function () {
+                            $scope.search();
+                        }
+                    );
+                });
         };
 
     });

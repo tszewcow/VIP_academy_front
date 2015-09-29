@@ -134,9 +134,9 @@ describe('BooksListCntl tests', function () {
             });
             expect($scope.search).toHaveBeenCalled();
         }));
-        it('should delete book on delete button clicked', inject(function ($q, booksData) {
+        it('should delete book on delete button clicked', inject(function ($q, booksData, $modal) {
             // given
-            var deleteBookDeferred = $q.defer(), deleteBook = {
+            var modalResultDeferred = $q.defer(), deleteBookDeferred = $q.defer(), deleteBook = {
                 id: 1,
                 version: 0,
                 genre: 'it',
@@ -145,13 +145,20 @@ describe('BooksListCntl tests', function () {
                 author: 'edited author'
             };
             $scope.selectedBook = [deleteBook];
+            spyOn($modal, 'open').and.returnValue({result: modalResultDeferred.promise});
             spyOn(booksData, 'deleteBook').and.returnValue(deleteBookDeferred.promise);
             spyOn($scope, 'search');
             // when
             $scope.deleteBook();
+            modalResultDeferred.resolve();
             deleteBookDeferred.resolve();
             $scope.$digest();
             // then
+            expect($modal.open).toHaveBeenCalledWith({
+                animation: true,
+                templateUrl: '/main/confirmation-dialog/confirmation.html',
+                size: 'modal-sm'
+            });
             expect(booksData.deleteBook).toHaveBeenCalledWith(deleteBook.id);
             expect($scope.search).toHaveBeenCalled();
         }));
