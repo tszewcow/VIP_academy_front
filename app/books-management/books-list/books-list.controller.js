@@ -38,4 +38,15 @@ angular.module('app.books-management')
                 });
         };
 
+        $scope.addBook = function () {
+            $modal.open({
+                animation: true,
+                templateUrl: '/books-management/add-book/add-book.tpl.html',
+                controller: 'AddBookCntl',
+                size: 'modal-lg'
+            }).result.then(function (editedBook) {
+                  // TODO perform search
+                });
+        };
+
     });
