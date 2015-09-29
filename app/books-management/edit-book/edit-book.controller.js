@@ -7,6 +7,10 @@ angular.module('app.books-management')
         $scope.editForm = {};
 
         $scope.editBook = function () {
+            //booksData.updateBook($scope.book).then(function (editedBook) {
+            //        $modalInstance.close(editedBook);
+            //    }
+            //);
             $modalInstance.close($scope.book);
         };
 
@@ -14,7 +18,7 @@ angular.module('app.books-management')
             $modalInstance.dismiss('cancel');
         };
 
-        $scope.isFormInvalid = function(){
+        $scope.isFormInvalid = function () {
             return $scope.editForm.$invalid;
         };
     });

@@ -44,9 +44,13 @@ angular.module('app.books-management')
                 templateUrl: '/books-management/add-book/add-book.tpl.html',
                 controller: 'AddBookCntl',
                 size: 'modal-lg'
-            }).result.then(function (editedBook) {
-                  // TODO perform search
+            }).result.then(function () {
+                    $scope.search();
                 });
+        };
+
+        $scope.deleteBook = function () {
+            booksData.deleteBook($scope.selectedBook[0].id);
         };
 
     });
