@@ -3,12 +3,14 @@ angular.module('app.books-management')
         'use strict';
 
         $scope.books = [];
-        $scope.selectedBook = [];
-        $scope.visibleColumns = ['title', 'author'];
         $scope.searchParameters = {};
 
+        $scope.selectRow = function(index){
+            $scope.selectedRowIndex = index;
+        };
+
         $scope.isDisabled = function () {
-            return !$scope.selectedBook.length;
+            return !$scope.selectedRowIndex;
         };
 
         $scope.resultsFound = function () {
@@ -29,7 +31,7 @@ angular.module('app.books-management')
                 size: 'modal-lg',
                 resolve: {
                     book: function () {
-                        return $scope.selectedBook[0];
+                        return $scope.books[$scope.selectedRowIndex];
                     }
                 }
             }).result.then(function (editedBook) {
@@ -55,7 +57,7 @@ angular.module('app.books-management')
                 templateUrl: '/main/confirmation-dialog/confirmation.html',
                 size: 'modal-sm'
             }).result.then(function () {
-                    booksData.deleteBook($scope.selectedBook[0].id).then(function () {
+                    booksData.deleteBook($scope.books[$scope.selectedRowIndex].id).then(function () {
                             $scope.search();
                         }
                     );
