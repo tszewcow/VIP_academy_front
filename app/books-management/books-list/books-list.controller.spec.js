@@ -12,17 +12,18 @@ describe('BooksListCntl tests', function () {
     describe('scope initialization', function () {
         it('should init scope variables', function () {
             // given when then
-            expect($scope.selectedBook.length).toBe(0);
-            expect($scope.visibleColumns.length).toBe(2);
-            expect($scope.visibleColumns[0]).toEqual('title');
-            expect($scope.visibleColumns[1]).toEqual('author');
+            expect($scope.books).toBeDefined();
+            expect($scope.books.length).toBe(0);
+            expect($scope.searchParameters).toBeDefined();
         });
 
     });
     describe('search', function () {
         it('should show result, when result found', function () {
             // given
-            $scope.books = [{name: 'test'}];
+            $scope.books = [
+                {name: 'test'}
+            ];
             // when then
             expect($scope.resultsFound()).toBeTruthy();
         });
@@ -34,14 +35,16 @@ describe('BooksListCntl tests', function () {
         });
         it('should search for books by given searchParams', inject(function ($q, booksData) {
             // given
-            var deferred = $q.defer(), response = [{
-                id: 1,
-                version: 0,
-                title: 'book title',
-                author: 'book author',
-                year: 1999,
-                genre: 'it'
-            }];
+            var deferred = $q.defer(), response = [
+                {
+                    id: 1,
+                    version: 0,
+                    title: 'book title',
+                    author: 'book author',
+                    year: 1999,
+                    genre: 'it'
+                }
+            ];
             spyOn(booksData, 'getBooks').and.returnValue(deferred.promise);
             $scope.searchParameters = {title: 'book title', author: 'book author'};
             // when
@@ -54,16 +57,24 @@ describe('BooksListCntl tests', function () {
             expect($scope.books).toEqual(response);
         }));
     });
-    describe('table buttons', function () {
-        it('should disabled edit and delete buttons, when no book was selected', function () {
+    describe('table actions', function () {
+        it('should select a row in the table', function () {
             // given
-            $scope.selectedBook = [];
+            var selectedRowIndex = 3;
+            // when
+            $scope.selectRow(selectedRowIndex);
+            // then
+            expect($scope.selectedRowIndex).toBe(selectedRowIndex);
+        });
+        it('should disable edit and delete buttons, when no book is selected', function () {
+            // given
+            $scope.selectedRowIndex = undefined;
             // when then
             expect($scope.isDisabled()).toBeTruthy();
         });
         it('should enable edit and delete buttons, when book was selected', function () {
             // given
-            $scope.selectedBook = [{name: 'test'}];
+            $scope.selectedRowIndex = 3;
             // when then
             expect($scope.isDisabled()).toBeFalsy();
         });
@@ -77,22 +88,25 @@ describe('BooksListCntl tests', function () {
                 title: 'Code Complete',
                 author: 'edited author'
             };
-            $scope.books = [{
-                id: 1,
-                version: 0,
-                genre: 'it',
-                year: 1999,
-                title: 'Code Complete',
-                author: 'Steve McConnell'
-            }, {
-                id: 3,
-                version: 0,
-                genre: 'it',
-                year: 2013,
-                title: 'Sztuka programowania',
-                author: 'Donald Knuth'
-            }];
-            $scope.selectedBook = [$scope.books[0]];
+            $scope.books = [
+                {
+                    id: 1,
+                    version: 0,
+                    genre: 'it',
+                    year: 1999,
+                    title: 'Code Complete',
+                    author: 'Steve McConnell'
+                },
+                {
+                    id: 3,
+                    version: 0,
+                    genre: 'it',
+                    year: 2013,
+                    title: 'Sztuka programowania',
+                    author: 'Donald Knuth'
+                }
+            ];
+            $scope.selectedRowIndex = 0;
             spyOn($modal, 'open').and.returnValue({result: modalResultDeferred.promise});
             // when
             $scope.editBook();
@@ -136,15 +150,18 @@ describe('BooksListCntl tests', function () {
         }));
         it('should delete book on delete button clicked', inject(function ($q, booksData, $modal) {
             // given
-            var modalResultDeferred = $q.defer(), deleteBookDeferred = $q.defer(), deleteBook = {
-                id: 1,
-                version: 0,
-                genre: 'it',
-                year: 1999,
-                title: 'Code Complete',
-                author: 'edited author'
-            };
-            $scope.selectedBook = [deleteBook];
+            var modalResultDeferred = $q.defer(), deleteBookDeferred = $q.defer();
+            $scope.books = [
+                {
+                    id: 1,
+                    version: 0,
+                    genre: 'it',
+                    year: 1999,
+                    title: 'Code Complete',
+                    author: 'edited author'
+                }
+            ];
+            $scope.selectedRowIndex = 0;
             spyOn($modal, 'open').and.returnValue({result: modalResultDeferred.promise});
             spyOn(booksData, 'deleteBook').and.returnValue(deleteBookDeferred.promise);
             spyOn($scope, 'search');
@@ -159,7 +176,7 @@ describe('BooksListCntl tests', function () {
                 templateUrl: '/main/confirmation-dialog/confirmation.html',
                 size: 'modal-sm'
             });
-            expect(booksData.deleteBook).toHaveBeenCalledWith(deleteBook.id);
+            expect(booksData.deleteBook).toHaveBeenCalledWith($scope.books[$scope.selectedRowIndex].id);
             expect($scope.search).toHaveBeenCalled();
         }));
     });
