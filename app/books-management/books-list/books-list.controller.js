@@ -10,7 +10,7 @@ angular.module('app.books-management')
         };
 
         $scope.isDisabled = function () {
-            return !$scope.selectedRowIndex;
+            return angular.isUndefined($scope.selectedRowIndex);
         };
 
         $scope.resultsFound = function () {
