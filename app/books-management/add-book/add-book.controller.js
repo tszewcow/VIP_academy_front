@@ -1,4 +1,4 @@
-angular.module('app.books-management').controller('AddBookCntl', function($modalInstance) {
+angular.module('app.books-management').controller('AddBookCntl', function($modalInstance, booksData) {
     'use strict';
 
     var cntl = this;

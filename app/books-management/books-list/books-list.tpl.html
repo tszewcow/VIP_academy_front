@@ -5,7 +5,24 @@
     <section data-ng-controller="BooksListCntl as cntl">
         <h2>Books List</h2>
 
-        <div class="ng-cloak">
+        <div class="row">
+           <div class="form-group col-md-3">
+               <label for="tileInputId">Title:</label>
+               <input id="tileInputId" data-ng-model="cntl.searchParameters.title" class="form-control"
+                      placeholder="Title..."/>
+           </div>
+           <div class="form-group col-md-3">
+               <label for="authorInputId">Author:</label>
+               <input id="authorInputId" data-ng-model="cntl.searchParameters.author" class="form-control"
+                      placeholder="Author..."/>
+           </div>
+       </div>
+       <div class="form-group">
+           <button class="btn btn-primary" data-ng-click="cntl.search()">Search</button>
+       </div>
+
+
+        <div data-ng-show="cntl.resultsFound()" class="ng-cloak">
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-hover table-bordered">
@@ -35,7 +52,7 @@
                     <div class="col-md-12">
                         <button class="btn btn-default" data-ng-disabled="cntl.isDisabled()" data-ng-click="cntl.editBook()">Edit</button>
                         <button class="btn btn-default" data-ng-click="cntl.addBook()">Add</button>
-                        <button class="btn btn-default" data-ng-disabled="cntl.isDisabled()">Delete</button>
+                        <button class="btn btn-default" data-ng-disabled="cntl.isDisabled()" data-ng-click="cntl.delete()">Delete</button>
                     </div>
                 </div>
             </div>

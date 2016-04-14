@@ -1,19 +1,21 @@
-angular.module('app.books-management').controller('BooksListCntl', function($modal) {
+angular.module('app.books-management').controller('BooksListCntl', function($modal, booksData) {
     'use strict';
 
     var cntl = this;
 
-    cntl.books = [{
-        title: 'title 1',
-        author: 'author 1',
-        genre: 'IT',
-        year: 2012
-    }, {
-        title: 'title 2',
-        author: 'author 2',
-        genre: 'Fantasy',
-        year: 1987
-    }];
+    cntl.searchParameters = {};
+
+    cntl.books = [];
+
+    cntl.search = function() {
+        booksData.getBooks(cntl.searchParameters).then(function(response) {
+            angular.copy(response.data, cntl.books);
+        });
+    };
+
+    cntl.resultsFound = function() {
+        return cntl.books.length;
+    };
 
     cntl.selectRow = function(index) {
         if (cntl.selectedRowIndex === index) {
@@ -49,6 +51,13 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
                     return cntl.books[cntl.selectedRowIndex];
                 }
             }
+        });
+    };
+
+    cntl.delete = function() {
+        booksData.deleteBook(cntl.books[cntl.selectedRowIndex].id).then(function() {
+            cntl.search();
+            cntl.selectedRowIndex = undefined;
         });
     };
 });

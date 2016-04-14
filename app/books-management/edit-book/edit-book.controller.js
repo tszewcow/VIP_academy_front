@@ -1,4 +1,4 @@
-angular.module('app.books-management').controller('EditBookCntl', function(book, $modalInstance) {
+angular.module('app.books-management').controller('EditBookCntl', function(book, $modalInstance, booksData) {
     'use strict';
 
     var cntl = this;
@@ -8,7 +8,7 @@ angular.module('app.books-management').controller('EditBookCntl', function(book,
     cntl.editForm = {};
 
     cntl.editBook = function() {
-            $modalInstance.close();
+        $modalInstance.close();
     };
 
     cntl.cancel = function() {
