@@ -2,6 +2,10 @@ node_modules
 bower_components
 .tmp
 dist
+test-output
 .idea/
 *.iml
-test-output
+java/target
+.settings
+.project
+.sonar
