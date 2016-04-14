@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title">Add book</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form-horizontal" name="cntl.addForm">
+            <div class="form-group"
+                 data-ng-class="{'has-error': cntl.addForm.titleInput.$invalid && cntl.addForm.titleInput.$dirty}">
+                <label for="titleInput" class="col-md-2 control-label">Title:</label>
+
+                <div class="col-md-10">
+                    <input class="form-control"
+                           id="titleInput"
+                           name="titleInput"
+                           data-ng-model="cntl.book.title"
+                           placeholder="Enter title..."
+                           maxlength="50"
+                           data-ng-required="true"/>
+                </div>
+            </div>
+            <div class="form-group"
+                 data-ng-class="{'has-error': cntl.addForm.authorInput.$invalid && cntl.addForm.authorInput.$dirty}">
+                <label for="authorInput" class="col-md-2 control-label">Author:</label>
+
+                <div class="col-md-10">
+                    <input class="form-control"
+                           id="authorInput"
+                           name="authorInput"
+                           data-ng-model="cntl.book.author"
+                           placeholder="Enter author..."
+                           maxlength="50"
+                           data-ng-required="true"/>
+                </div>
+            </div>
+            <div class="form-group"
+                 data-ng-class="{'has-error': cntl.addForm.yearInput.$invalid && cntl.addForm.yearInput.$dirty}">
+                <label for="yearInput" class="col-md-2 control-label">Year:</label>
+
+                <div class="col-md-10">
+                    <input class="form-control"
+                           id="yearInput"
+                           type="number"
+                           name="yearInput"
+                           data-ng-model="cntl.book.year"
+                           placeholder="Enter year..."
+                           min="1900"
+                           max="2500"
+                           data-ng-required="true"/>
+                </div>
+            </div>
+            <div class="form-group"
+                 data-ng-class="{'has-error': cntl.addForm.genreInput.$invalid && cntl.addForm.genreInput.$dirty}">
+                <label for="genreInput" class="col-md-2 control-label">Genre:</label>
+
+                <div class="col-md-10">
+                    <input class="form-control"
+                           id="genreInput"
+                           name="genreInput"
+                           data-ng-model="cntl.book.genre"
+                           placeholder="Enter genre..."
+                           maxlength="30"
+                           data-ng-required="true"/>
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-ng-click="cntl.addBook()" data-ng-disabled="cntl.isFormInvalid()">Add</button>
+        <button class="btn btn-warning" data-ng-click="cntl.cancel()">Cancel</button>
+    </div>
+
+</div>
+
+</body>
+</html>

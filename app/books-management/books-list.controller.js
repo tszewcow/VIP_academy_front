@@ -1,4 +1,4 @@
-angular.module('app.books-management').controller('BooksListCntl', function($scope) {
+angular.module('app.books-management').controller('BooksListCntl', function($modal) {
     'use strict';
 
     var cntl = this;
@@ -25,5 +25,15 @@ angular.module('app.books-management').controller('BooksListCntl', function($sco
 
     this.isDisabled = function() {
         return angular.isUndefined(this.selectedRowIndex);
+    };
+
+    this.addBook = function() {
+        $modal.open({
+            animation: true,
+            templateUrl: '/books-management/add-book/add-book.tpl.html',
+            controller: 'AddBookCntl',
+            controllerAs: 'cntl',
+            size: 'modal-lg'
+        });
     };
 });
