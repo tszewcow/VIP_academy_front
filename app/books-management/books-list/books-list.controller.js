@@ -3,7 +3,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($sco
 
     var cntl = this;
 
-    this.books = [{
+    cntl.books = [{
         title: 'title 1',
         author: 'author 1',
         genre: 'IT',
@@ -15,7 +15,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($sco
         year: 1987
     }];
 
-    this.selectRow = function(index) {
+    cntl.selectRow = function(index) {
         if (angular.isDefined(this.selectedRowIndex)) {
             this.selectedRowIndex = undefined;
         } else {
@@ -23,7 +23,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($sco
         }
     };
 
-    this.isDisabled = function() {
+    cntl.isDisabled = function() {
         return angular.isUndefined(this.selectedRowIndex);
     };
 });
