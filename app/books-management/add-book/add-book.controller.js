@@ -3,10 +3,6 @@ angular.module('app.books-management').controller('AddBookCntl', function($modal
 
     var cntl = this;
 
-    cntl.book = {};
-
-    cntl.addForm = {};
-
     cntl.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
@@ -14,9 +10,4 @@ angular.module('app.books-management').controller('AddBookCntl', function($modal
     cntl.addBook = function() {
         $modalInstance.close();
     }
-
-    cntl.isFormInvalid = function() {
-        return cntl.addForm.$invalid;
-    };
-
 });
