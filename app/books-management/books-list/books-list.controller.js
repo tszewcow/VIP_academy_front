@@ -16,15 +16,15 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
     }];
 
     cntl.selectRow = function(index) {
-        if (angular.isDefined(this.selectedRowIndex)) {
-            this.selectedRowIndex = undefined;
+        if (angular.isDefined(cntl.selectedRowIndex)) {
+            cntl.selectedRowIndex = undefined;
         } else {
-            this.selectedRowIndex = index;
+            cntl.selectedRowIndex = index;
         }
     };
 
     cntl.isDisabled = function() {
-        return angular.isUndefined(this.selectedRowIndex);
+        return angular.isUndefined(cntl.selectedRowIndex);
     };
 
     cntl.addBook = function() {
