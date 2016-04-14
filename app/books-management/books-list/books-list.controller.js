@@ -16,7 +16,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
     }];
 
     cntl.selectRow = function(index) {
-        if (angular.isDefined(this.selectedRowIndex)) {
+        if (angular.isDefined(cntl.selectedRowIndex)) {
             cntl.selectedRowIndex = undefined;
         } else {
             cntl.selectedRowIndex = index;
