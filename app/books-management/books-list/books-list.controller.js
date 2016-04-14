@@ -3,7 +3,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
 
     var cntl = this;
 
-    this.books = [{
+    cntl.books = [{
         title: 'title 1',
         author: 'author 1',
         genre: 'IT',
@@ -15,19 +15,19 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
         year: 1987
     }];
 
-    this.selectRow = function(index) {
+    cntl.selectRow = function(index) {
         if (angular.isDefined(this.selectedRowIndex)) {
-            this.selectedRowIndex = undefined;
+            cntl.selectedRowIndex = undefined;
         } else {
-            this.selectedRowIndex = index;
+            cntl.selectedRowIndex = index;
         }
     };
 
-    this.isDisabled = function() {
-        return angular.isUndefined(this.selectedRowIndex);
+    cntl.isDisabled = function() {
+        return angular.isUndefined(cntl.selectedRowIndex);
     };
 
-    this.addBook = function() {
+    cntl.addBook = function() {
         $modal.open({
             animation: true,
             templateUrl: '/books-management/add-book/add-book.tpl.html',
