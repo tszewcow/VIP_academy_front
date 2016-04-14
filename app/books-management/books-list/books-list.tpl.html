@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <body>
-<h2>Hello from Book List dialog!</h2>
+    <section data-ng-controller="BooksListCntl as cntl">
+        <h2>Books List</h2>
+
+        <div class="ng-cloak">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Genre</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-ng-repeat="book in cntl.books" data-ng-click="cntl.selectRow($index)" data-ng-class="{'active': $index === cntl.selectedRowIndex}">
+                                <td data-ng-bind="book.title"></td>
+                                <td data-ng-bind="book.author"></td>
+                                <td data-ng-bind="book.genre"></td>
+                                <td data-ng-bind="book.year"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <button class="btn btn-default" data-ng-disabled="cntl.isDisabled()">Edit</button>
+                        <button class="btn btn-default">Add</button>
+                        <button class="btn btn-default" data-ng-disabled="cntl.isDisabled()">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
+
 </html>
