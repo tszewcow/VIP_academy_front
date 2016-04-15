@@ -36,6 +36,11 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
             controller: 'AddBookCntl',
             controllerAs: 'cntl',
             size: 'modal-lg'
+        }).result.then(function(result) {
+            cntl.search();
+
+            // alternative for stream 1
+            // cntl.books.push(result);
         });
     };
 
@@ -51,6 +56,13 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
                     return cntl.books[cntl.selectedRowIndex];
                 }
             }
+        }).result.then(function(result) {
+            cntl.search();
+            cntl.selectedRowIndex = undefined;
+
+            // alternative for stream 1
+            // cntl.books[cntl.selectedRowIndex] = result;
+            // cntl.selectedRowIndex = undefined;
         });
     };
 
@@ -59,5 +71,9 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
             cntl.search();
             cntl.selectedRowIndex = undefined;
         });
+
+        // alternative for stream 1
+        // cntl.books.splice(cntl.selectedRowIndex, 1);
+        // cntl.selectedRowIndex = undefined;
     };
 });

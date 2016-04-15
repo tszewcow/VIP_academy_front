@@ -7,15 +7,20 @@ angular.module('app.books-management').controller('EditBookCntl', function(book,
 
     cntl.editForm = {};
 
-    cntl.editBook = function() {
-        $modalInstance.close();
+    cntl.isFormInvalid = function() {
+        return cntl.editForm.$invalid;
     };
 
     cntl.cancel = function() {
         $modalInstance.dismiss('cancel');
     };
 
-    cntl.isFormInvalid = function() {
-        return cntl.editForm.$invalid;
+    cntl.editBook = function() {
+        booksData.updateBook(cntl.book).then(function(editedBook) {
+            $modalInstance.close(editedBook);
+        });
+
+        // alternative for stream 1
+        // $modalInstance.close(cntl.book);
     };
 });

@@ -12,8 +12,13 @@ angular.module('app.books-management').controller('AddBookCntl', function($modal
     };
 
     cntl.addBook = function() {
-        $modalInstance.close();
-    }
+        booksData.saveBook(cntl.book).then(function(addedBook) {
+            $modalInstance.close(addedBook);
+        });
+
+        // alternative for stream 1
+        // $modalInstance.close(cntl.book);
+    };
 
     cntl.isFormInvalid = function() {
         return cntl.addForm.$invalid;
