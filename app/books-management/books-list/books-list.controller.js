@@ -57,7 +57,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
                 }
             }
         }).result.then(function(result) {
-            cntl.search();
+            cntl.books[cntl.selectedRowIndex] = result;
             cntl.selectedRowIndex = undefined;
 
             // alternative for stream 1
