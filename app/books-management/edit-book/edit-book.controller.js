@@ -17,6 +17,7 @@ angular.module('app.books-management').controller('EditBookCntl', function(book,
 
     cntl.editBook = function() {
         booksData.updateBook(cntl.book).then(function(editedBook) {
+            var editedBook = response.data;
             $modalInstance.close(editedBook);
         });
 
