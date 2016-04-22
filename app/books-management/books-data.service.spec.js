@@ -28,9 +28,9 @@ describe('booksData service tests', function() {
                 id: 1,
                 title: 'title2'
             }];
-        // for stream 2
-        // $httpBackend.expectGET('http://localhost:9000/services/book').respond(response);
-        $httpBackend.expectGET('/books-management/books-list/books.json?author=author&title=title').respond(response);
+        $httpBackend.expectGET('http://localhost:9000/services/books?author=author&title=title').respond(response);
+        // for stream 1
+        // $httpBackend.expectGET('/books-management/books-list/books.json?author=author&title=title').respond(response);
         // when
         booksData.getBooks(searchParams).then(function(response) {
             books = response.data;

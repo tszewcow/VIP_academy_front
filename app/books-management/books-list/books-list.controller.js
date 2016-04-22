@@ -10,6 +10,7 @@ angular.module('app.books-management').controller('BooksListCntl', function($mod
     cntl.search = function() {
         booksData.getBooks(cntl.searchParameters).then(function(response) {
             angular.copy(response.data, cntl.books);
+            cntl.selectedRowIndex = undefined;
         });
     };
 

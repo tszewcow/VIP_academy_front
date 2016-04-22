@@ -3,10 +3,10 @@ angular.module('app.books-management').factory('booksData', function($http) {
 
     return {
         getBooks: function(searchParams) {
-            //return $http.get('http://localhost:9000/services/books', {params: searchParams});
-            return $http.get('/books-management/books-list/books.json', {
-                params: searchParams
-            });
+            return $http.get('http://localhost:9000/services/books', {params: searchParams});
+            // return $http.get('/books-management/books-list/books.json', {
+            //     params: searchParams
+            // });
         },
         saveBook: function(book) {
             return $http.post('http://localhost:9000/services/book', book);
